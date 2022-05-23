@@ -1,7 +1,7 @@
-export interface Person {
+export interface InputPerson {
     firstName: string;
     lastName: string;
-    age: number;
-    dateOfBirth: Date;
+    age: string;
+    dateOfBirth: string;
     currentProfession: string;
 }

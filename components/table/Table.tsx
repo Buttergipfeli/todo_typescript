@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import React from 'react';
-import styles from '../../styles/Table.module.css';
+import styles from '../../styles/components/Table.module.css';
 import { Person } from '../../interfaces/Person';
 
 interface Props {
@@ -23,8 +23,8 @@ const Table: React.FC<Props> = ({ persons }) => {
                 {persons &&
                     persons.map((person: Person, index: number) =>
                         <tr key={index}>
-                            <td>{person.firstname}</td>
-                            <td>{person.lastname}</td>
+                            <td>{person.firstName}</td>
+                            <td>{person.lastName}</td>
                             <td>{person.age}</td>
                             <td>{person.dateOfBirth.toLocaleDateString()}</td>
                             <td>{person.currentProfession}</td>
