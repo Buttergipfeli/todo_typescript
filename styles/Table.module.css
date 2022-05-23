@@ -1,0 +1,19 @@
+.table {
+    border: solid 2px #08ee8a;
+    border-collapse: collapse;
+  }
+  
+  .tableHead {
+    text-align: left;
+  }
+  
+  .tableHead tr th {
+    border: solid 2px #08ee8a;
+    padding: 5px;
+    width: 200px;
+  }
+  
+  .tableBody tr td {
+    border: solid 2px #08ee8a;
+    padding: 5px;
+  }
