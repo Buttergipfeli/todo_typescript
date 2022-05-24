@@ -1,19 +1,33 @@
 .table {
-    border: solid 2px #08ee8a;
-    border-collapse: collapse;
-  }
-  
-  .tableHead {
-    text-align: left;
-  }
-  
-  .tableHead tr th {
-    border: solid 2px #08ee8a;
-    padding: 5px;
-    width: 200px;
-  }
-  
-  .tableBody tr td {
-    border: solid 2px #08ee8a;
-    padding: 5px;
-  }
+  border: solid 2px #08ee8a;
+  border-collapse: collapse;
+}
+
+.tableHead {
+  text-align: left;
+}
+
+.tableHead tr th {
+  border: solid 2px #08ee8a;
+  padding: 5px;
+  width: 200px;
+}
+
+.tableBody tr td {
+  border: solid 2px #08ee8a;
+  padding: 5px;
+}
+
+.deleteButton {
+  background-color: #c50303;
+  border: solid 2px #000000;
+  border-radius: 5px;
+  width: 100%;
+  box-shadow: 2px 1.5px 2px hsla(0, 0%, 0%, 0.533);
+}
+
+.deleteButton:hover {
+  background-color: #f93434;
+  cursor: pointer;
+  transition: 0.3s;
+}

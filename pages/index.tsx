@@ -51,6 +51,7 @@ const Home: NextPage = () => {
       return;
     }
     const newPerson: Person = {
+      id: -1,
       firstName,
       lastName,
       age: Number(age),
@@ -73,6 +74,15 @@ const Home: NextPage = () => {
       });
   }
 
+  const deletePerson = (id: number): void => {
+    axios.delete('http://localhost:3000/api/persons', { headers: { 'Content-Type': 'application/json' }, data: { id } })
+      .then(res => {
+        setPersons(persons.filter(person => person.id !== id));
+      }, err => {
+        setErrorMessage(err.response.data.message);
+      })
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -81,7 +91,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Welcome to my first TypeScript project</h1>
-      <Table persons={persons} />
+      <Table persons={persons} deletePerson={deletePerson} />
       <InputField person={registerPerson} inputHandler={inputHandler} registerHandler={registerHandler} errorMessage={errorMessage} />
     </div>
   )

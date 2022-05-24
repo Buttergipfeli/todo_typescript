@@ -35,11 +35,21 @@ export default function handler(
         if (persons.length === 0) {
             person.id = 1;
         } else {
-            person.id = Math.max(...persons.map<number>(p => Number(p.id))) + 1;
+            person.id = Math.max(...persons.map<number>(p => (p.id))) + 1;
         }
         persons.push(person);
         fs.writeFileSync('./data/persons.json', JSON.stringify(persons));
         res.status(200).json({ message: 'Successfully registered a new person' });
+    } else if (req.method === 'DELETE') {
+        const { id }: { id: number } = req.body;
+        const index = persons.findIndex(p => p.id === id);
+        if (index === -1) {
+            res.status(404).json({ message: 'Person not found' });
+            return;
+        }
+        persons.splice(index, 1);
+        fs.writeFileSync('./data/persons.json', JSON.stringify(persons));
+        res.status(200).json({ message: 'Successfully deleted the person' });
     } else {
         res.status(405).json({ message: 'Method not allowed' });
     }

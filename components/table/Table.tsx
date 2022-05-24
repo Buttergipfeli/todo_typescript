@@ -5,9 +5,10 @@ import { Person } from '../../interfaces/Person';
 
 interface Props {
     persons: Person[];
+    deletePerson: (id: number) => void;
 }
 
-const Table: React.FC<Props> = ({ persons }) => {
+const Table: React.FC<Props> = ({ persons, deletePerson }) => {
     return (
         <table className={styles.table}>
             <thead className={styles.tableHead}>
@@ -17,6 +18,7 @@ const Table: React.FC<Props> = ({ persons }) => {
                     <th>Age</th>
                     <th>Date of birth</th>
                     <th>Current profession</th>
+                    <th>Delete person</th>
                 </tr>
             </thead>
             <tbody className={styles.tableBody}>
@@ -28,6 +30,7 @@ const Table: React.FC<Props> = ({ persons }) => {
                             <td>{person.age}</td>
                             <td>{new Date(person.dateOfBirth).toLocaleDateString()}</td>
                             <td>{person.currentProfession}</td>
+                            <td><button onClick={() => deletePerson(person.id)} className={styles.deleteButton}>Delete</button></td>
                         </tr>
                     )
                 }
