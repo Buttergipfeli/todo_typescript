@@ -13,11 +13,10 @@ export default function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ): void {
-    if (req.method === 'GET') {
-        return res.status(200).json({ persons: persons });
-    }
 
-    if (req.method === 'POST') {
+    if (req.method === 'GET') {
+        res.status(200).json({ persons });
+    } else if (req.method === 'POST') {
         const { firstName, lastName, age, dateOfBirth, currentProfession }: Person = req.body;
         // small validation
         if (firstName.length === 0 || lastName.length === 0 || currentProfession.length === 0 || age < 0) {
@@ -32,9 +31,16 @@ export default function handler(
             res.status(400).json({ message: 'Age must be a number' });
             return;
         }
-        const person: Person = req.body;
+        let person: Person = req.body;
+        if (persons.length === 0) {
+            person.id = 1;
+        } else {
+            person.id = Math.max(...persons.map<number>(p => Number(p.id))) + 1;
+        }
         persons.push(person);
         fs.writeFileSync('./data/persons.json', JSON.stringify(persons));
         res.status(200).json({ message: 'Successfully registered a new person' });
+    } else {
+        res.status(405).json({ message: 'Method not allowed' });
     }
 }

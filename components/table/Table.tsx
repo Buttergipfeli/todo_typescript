@@ -20,13 +20,13 @@ const Table: React.FC<Props> = ({ persons }) => {
                 </tr>
             </thead>
             <tbody className={styles.tableBody}>
-                {persons &&
+                {persons.length > 0 &&
                     persons.map((person: Person, index: number) =>
                         <tr key={index}>
                             <td>{person.firstName}</td>
                             <td>{person.lastName}</td>
                             <td>{person.age}</td>
-                            <td>{person.dateOfBirth.toLocaleDateString()}</td>
+                            <td>{new Date(person.dateOfBirth).toLocaleDateString()}</td>
                             <td>{person.currentProfession}</td>
                         </tr>
                     )

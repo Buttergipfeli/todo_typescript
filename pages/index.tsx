@@ -5,7 +5,7 @@ import { Table } from '../components/table/Table';
 import { InputField } from '../components/inputfield/InputField';
 import { Person } from '../interfaces/Person';
 import { InputPerson } from '../interfaces/InputPerson';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Home: NextPage = () => {
@@ -17,13 +17,19 @@ const Home: NextPage = () => {
     dateOfBirth: '',
     currentProfession: ''
   });
-  const [persons, setPersons] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
-
+  const [persons, setPersons] = useState<Person[]>([]);
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     setRegisterPerson({ ...registerPerson, [name]: value });
   }
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/persons')
+      .then(res => {
+        setPersons(res.data.persons);
+      });
+  }, []);
 
   const registerHandler = (): void => {
     const { firstName, lastName, age, dateOfBirth, currentProfession } = registerPerson;
@@ -53,8 +59,8 @@ const Home: NextPage = () => {
     }
     axios.post('http://localhost:3000/api/persons', JSON.stringify(newPerson), { headers: { 'Content-Type': 'application/json' } })
       .then(res => {
-        setErrorMessage(res.data.message);
         setPersons(persons => [...persons, newPerson]);
+        setErrorMessage(res.data.message);
         setRegisterPerson({
           firstName: '',
           lastName: '',
