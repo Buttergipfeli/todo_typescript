@@ -1,4 +1,4 @@
-export interface InputPerson {
+export type InputPerson = {
     firstName: string;
     lastName: string;
     age: string;
