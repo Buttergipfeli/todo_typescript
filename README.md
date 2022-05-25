@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project with TypeScript.
 
 ## What is covered?
 
-Passing props over components, declaring variables with types and creating interfaces and so on.
+Passing props over components, declaring variables with types and creating own types and so on. The name of the repository is todo but it isn't a todo-list application :(.
 
 ## What can you do in the Application
 
