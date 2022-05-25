@@ -7,6 +7,7 @@ const persons: Person[] = require('../../data/persons.json');
 type Data = {
     message?: string;
     persons?: Person[];
+    person?: Person;
 }
 
 export default function handler(
@@ -39,7 +40,7 @@ export default function handler(
         }
         persons.push(person);
         fs.writeFileSync('./data/persons.json', JSON.stringify(persons));
-        res.status(200).json({ message: 'Successfully registered a new person' });
+        res.status(200).json({ message: 'Successfully registered a new person', person: person });
     } else if (req.method === 'DELETE') {
         const { id }: { id: number } = req.body;
         const index = persons.findIndex(p => p.id === id);

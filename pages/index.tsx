@@ -60,7 +60,7 @@ const Home: NextPage = () => {
     }
     axios.post('http://localhost:3000/api/persons', JSON.stringify(newPerson), { headers: { 'Content-Type': 'application/json' } })
       .then(res => {
-        setPersons(persons => [...persons, newPerson]);
+        setPersons(persons => [...persons, res.data.person]);
         setErrorMessage(res.data.message);
         setRegisterPerson({
           firstName: '',
